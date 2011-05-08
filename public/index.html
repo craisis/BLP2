@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BLP2</title>
+    <link rel="stylesheet" href="extjs/resources/css/ext-all.css">
+    <script src="extjs/builds/ext-core.js"></script>
+    <script>
+      Ext.Loader.setConfig({
+        enabled: true,
+        paths: {'Ext': './extjs/src', 'BLP2': './app'}
+      });
+
+      Ext.application({
+        name: 'BLP2',
+        controllers: [],
+        autoCreateViewport: true
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
