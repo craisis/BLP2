@@ -4,11 +4,15 @@ Ext.define('BLP2.store.Logbooks', {
 
   model: 'BLP2.model.Logbook',
 
-  data: [{
-    title: 'BARC Jr. Field Day 2011'
-  }, {
-    title: 'Something else!'
-  }]
+  proxy: {
+    type: 'ajax',
+    url: '/logbooks.json',
+    reader: {
+      type: 'json',
+      root: 'logbooks'
+    },
+    autoLoad: true
+  }
 }, function(){
   //new BLP2.store.Logbooks({storeId: 'Logbooks'});
 });
