@@ -3,7 +3,7 @@
   "name": "ARRL Field Day",
   "exchangeFields": [{
     "label": "Call Sign",
-    "type": "Text",
+    "type": "textfield",
     "behaviors": {
       "required": true,
       "uppercase": true,
@@ -11,15 +11,15 @@
     }
   }, {
     "label": "Category",
-    "type": "Text",
+    "type": "textfield",
     "behaviors": {
       "required": true,
       "uppercase": true,
-      "format": "\d+[A-F]"
+      "format": "\\d+[A-F]"
     }
   }, {
     "label": "Section",
-    "type": "ComboBox",
+    "type": "textfield",
     "data": "sections",
     "behaviors": {
       "required": true,
@@ -32,7 +32,7 @@
     "radioModes": ["Voice", "CW", "Digital"],
     "dupeCheck": ["Call Sign", "Band", "Mode"],
     "reservation": ["Band", "Mode"]
-  }
+  },
   "data": {
     "sections": "ARRLSections.json"
   }

@@ -2,101 +2,36 @@ Ext.define('BLP2.ContestManager', {
   singleton: true,
   requires: [
     'BLP2.Contest',
-    'BLP2.view.ContactEntry'
+    'BLP2.view.ContactEntry',
+    'Ext.Ajax',
+    'Ext.JSON'
   ],
   constructor: function(){
     this.contests = {};
   },
   
-  getContactEntry: function(contestId){
+  getContactEntry: function(contestId, callback){
+    var me = this;
     var panel = Ext.create('BLP2.view.ContactEntry');
-    panel.init({
-      "id": "ARRLFieldDay",
-      "name": "ARRL Field Day",
-      "exchangeFields": [{
-        "label": "Call Sign",
-        "type": "textfield",
-        "behaviors": {
-          "required": true,
-          "uppercase": true,
-          "format": "[A-Z0-9]+"
-        }
-      }, {
-        "label": "Category",
-        "type": "textfield",
-        "behaviors": {
-          "required": true,
-          "uppercase": true,
-          "format": "\d+[A-F]"
-        }
-      }, {
-        "label": "Section",
-        "type": "textfield",
-        "data": "sections",
-        "behaviors": {
-          "required": true,
-          "uppercase": true
-        }
-      }],
-      "behaviors": {
-        "autofill": {"Call Sign": ["Category", "Section"]},
-        "bandLimits": {"exclude": ["60m", "30m", "17m", "12m"]},
-        "radioModes": ["Voice", "CW", "Digital"],
-        "dupeCheck": ["Call Sign", "Band", "Mode"],
-        "reservation": ["Band", "Mode"]
-      },
-      "data": {
-        "sections": "ARRLSections.json"
-      }
-    });
-    return panel;
-  },
-
-  lookup: function(contestID){
-    if(this.contests.hasOwnProperty(contestID)){
-      return this.contests[contestID];
+    var createPanel = function(contestJSON,callback){
+      panel.init(contestJSON);
+      callback(panel);
+      return;
+    };
+    if(this.contests.hasOwnProperty(contestId)){
+      createPanel(this.contests[contestId],callback);
+      return;
     }
-    
-    // Create blank contest
-    return new BLP2.Contest('ARRLFieldDay',{
-      "id": "ARRLFieldDay",
-      "name": "ARRL Field Day",
-      "exchangeFields": [{
-        "label": "Call Sign",
-        "type": "textfield",
-        "behaviors": {
-          "required": true,
-          "uppercase": true,
-          "format": "[A-Z0-9]+"
+    // AJAX call to get contest
+    Ext.Ajax.request({
+        url: 'contests/'+contestId,
+        success: function(response){
+            me.contests[contestId] = Ext.JSON.decode(response.responseText);
+            createPanel(me.contests[contestId],callback);
+            // process server response here
         }
-      }, {
-        "label": "Category",
-        "type": "textfield",
-        "behaviors": {
-          "required": true,
-          "uppercase": true,
-          "format": "\d+[A-F]"
-        }
-      }, {
-        "label": "Section",
-        "type": "textfield",
-        "data": "sections",
-        "behaviors": {
-          "required": true,
-          "uppercase": true
-        }
-      }],
-      "behaviors": {
-        "autofill": {"Call Sign": ["Category", "Section"]},
-        "bandLimits": {"exclude": ["60m", "30m", "17m", "12m"]},
-        "radioModes": ["Voice", "CW", "Digital"],
-        "dupeCheck": ["Call Sign", "Band", "Mode"],
-        "reservation": ["Band", "Mode"]
-      },
-      "data": {
-        "sections": "ARRLSections.json"
-      }
     });
+    
   }
   
 });
