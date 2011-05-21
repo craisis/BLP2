@@ -20,17 +20,17 @@ Ext.define('BLP2.controller.LogbookBrowser', {
     var me = this;
     this.control({
       'viewport > #menubar > #change-logbook': {
-	click: this.showLogbookBrowser
+        click: this.showLogbookBrowser
       },
       'logbook-browser': {
-	destroy: function(){ delete me.window; }
+        destroy: function(){ delete me.window; }
       },
       'logbook-browser gridpanel': {
-	select: this.onLogbookSelected,
-	itemdblclick: this.onLogbookDoubleClick
+        select: this.onLogbookSelected,
+        itemdblclick: this.onLogbookDoubleClick
       },
       'logbook-details button': {
-	click: this.onLogbookOpen
+        click: this.onLogbookOpen
       }
     });
   },
@@ -38,8 +38,8 @@ Ext.define('BLP2.controller.LogbookBrowser', {
   showLogbookBrowser: function(){
     if(!this.hasOwnProperty('window')) {
       var size = {
-	width: (this.getViewport().getWidth() * 0.75),
-	height: (this.getViewport().getHeight() * 0.75)
+        width: (this.getViewport().getWidth() * 0.75),
+        height: (this.getViewport().getHeight() * 0.75)
       };
       this.getLogbooksStore().load();
       this.window = Ext.create('BLP2.view.LogbookBrowser', size);
@@ -57,15 +57,21 @@ Ext.define('BLP2.controller.LogbookBrowser', {
   },
 
   onLogbookDoubleClick: function(view, record){
-    //var fieldPanel = new (BLP2.ContestManager.lookup('contestID').ContactViewClass)();
-    var fieldPanel = BLP2.ContestManager.getContactEntry('contestId');
-    this.getLogbookEntry().removeAll(fieldPanel);
-    this.getLogbookEntry().add(fieldPanel);
-    this.window.close();
+    this.openLogbook(record);
   },
 
   onLogbookOpen: function() {
     var record = this.window.query('gridpanel')[0].selected;
-    this.onLogbookDoubleClick(null, record);
+    this.openLogbook(record);
+  },
+
+  openLogbook: function(logbookRecord){
+    this.getLogbookEntry().removeAll();
+    this.getViewport().setLoading(true);
+    this.window.close();
+    BLP2.ContestManager.getContactEntry(logbookRecord.contestId, function(panel){
+      this.getViewport().setLoading(false);
+      this.getLogbookEntry().add(fieldPanel);
+    });
   }
 });
