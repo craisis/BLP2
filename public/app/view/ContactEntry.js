@@ -5,7 +5,8 @@ Ext.define('BLP2.view.ContactEntry', {
     'Ext.form.FieldContainer',
     'Ext.form.field.Text',
     'Ext.layout.container.Anchor',
-    'Ext.layout.container.HBox'
+    'Ext.layout.container.HBox',
+    'Ext.form.field.ComboBox'
   ],
 
   layout: 'anchor',
@@ -34,11 +35,19 @@ Ext.define('BLP2.view.ContactEntry', {
   }, {
     title: 'People',
     items: [{
-      xtype: 'textfield',
-      fieldLabel: 'Operator'
+      xtype: 'combo',
+      fieldLabel: 'Operator',
+      store: 'People',
+      queryMode: 'local',
+      displayField: 'callSign',
+      valueField: 'callSign'
     }, {
-      xtype: 'textfield',
-      fieldLabel: 'Logger'
+      xtype: 'combo',
+      fieldLabel: 'Logger',
+      store: 'People',
+      queryMode: 'local',
+      displayField: 'callSign',
+      valueField: 'callSign'
     }]
   }, {
     title: 'Other',
