@@ -41,6 +41,7 @@ Ext.define('BLP2.controller.LogbookBrowser', {
 	width: (this.getViewport().getWidth() * 0.75),
 	height: (this.getViewport().getHeight() * 0.75)
       };
+      this.getLogbooksStore().load();
       this.window = Ext.create('BLP2.view.LogbookBrowser', size);
     }
 
