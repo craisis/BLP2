@@ -70,9 +70,11 @@ Ext.define('BLP2.controller.LogbookBrowser', {
     this.getLogbookEntry().removeAll();
     this.getViewport().setLoading(true);
     this.window.close();
-    BLP2.ContestManager.getContactEntry('ARRLFieldDay', function(panel){
-      me.getViewport().setLoading(false);
-      me.getLogbookEntry().add(panel);
+    BLP2.ContestManager.fetchContest('ARRLFieldDay', function(){
+      BLP2.ContestManager.getContactEntry('ARRLFieldDay', function(panel){
+        me.getViewport().setLoading(false);
+        me.getLogbookEntry().add(panel);
+      });
     });
   }
 });
