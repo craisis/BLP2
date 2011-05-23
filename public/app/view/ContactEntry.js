@@ -39,14 +39,14 @@ Ext.define('BLP2.view.ContactEntry', {
       fieldLabel: 'Operator',
       store: 'People',
       queryMode: 'local',
-      displayField: 'callSign',
+      displayField: 'displayName',
       valueField: 'id'
     }, {
       xtype: 'combo',
       fieldLabel: 'Logger',
       store: 'People',
       queryMode: 'local',
-      displayField: 'callSign',
+      displayField: 'displayName',
       valueField: 'id'
     }]
   }, {
