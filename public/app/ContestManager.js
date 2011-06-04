@@ -4,10 +4,12 @@ Ext.define('BLP2.ContestManager', {
     'BLP2.Contest',
     'BLP2.view.ContactEntry',
     'Ext.Ajax',
-    'Ext.JSON'
+    'Ext.JSON',
+    'BLP2.model.Contact'
   ],
   constructor: function(){
     this.contests = {};
+    this.contestModels = {};
   },
   
   fetchContest: function(contestId,callback){
@@ -32,6 +34,19 @@ Ext.define('BLP2.ContestManager', {
       var panel = Ext.create('BLP2.view.ContactEntry');
       panel.init(contestJSON);
       callback(panel);
+    });
+  },
+  
+  getContactModel: function(contestId, callback){
+    var me = this;
+    if(this.contestModels.hasOwnProperty(contestId)){
+      callback(this.contestModels[contestId]);
+      return;
+    }
+    this.fetchContest(contestId,function(contestJSON){
+      me.contestModels[contestId] = BLP2.model.Contact(contestJSON);
+      callback(me.contestModels[contestId]);
+      
     });
   }
   

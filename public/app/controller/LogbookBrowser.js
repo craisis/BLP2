@@ -3,7 +3,10 @@ Ext.define('BLP2.controller.LogbookBrowser', {
   
   stores: ['Logbooks'],
   views: ['LogbookBrowser', 'LogbookDetails'],
-  requires: ['BLP2.ContestManager'],
+  requires: [
+    'BLP2.ContestManager',
+    'BLP2.LogbookManager'
+  ],
 
   refs: [{
     ref: 'informationPanel',
@@ -59,7 +62,8 @@ Ext.define('BLP2.controller.LogbookBrowser', {
   onLogbookDoubleClick: function(view, record){
     this.openLogbook(record);
   },
-
+  
+  // Below is BROKEN, this.window.query('gridpanel')[0].selected does not work!
   onLogbookOpen: function() {
     var record = this.window.query('gridpanel')[0].selected;
     this.openLogbook(record);
@@ -70,8 +74,12 @@ Ext.define('BLP2.controller.LogbookBrowser', {
     this.getLogbookEntry().removeAll();
     this.getViewport().setLoading(true);
     this.window.close();
-    BLP2.ContestManager.fetchContest('ARRLFieldDay', function(){
-      BLP2.ContestManager.getContactEntry('ARRLFieldDay', function(panel){
+    BLP2.ContestManager.fetchContest(logbookRecord.data.contestId, function(){
+      BLP2.ContestManager.getContactModel(logbookRecord.data.contestId, function(contactModel){
+        
+        
+      });
+      BLP2.ContestManager.getContactEntry(logbookRecord.data.contestId, function(panel){
         me.getViewport().setLoading(false);
         me.getLogbookEntry().add(panel);
       });
