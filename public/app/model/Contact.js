@@ -6,7 +6,7 @@ Ext.define('BLP2.model.Contact', {
     {type: 'belongsTo', associationKey: 'operator', foreignKey: 'operatorId', ownerModel: 'Person'},
     {type: 'belongsTo', associationKey: 'logger', foreignKey: 'loggerId', ownerModel: 'Person'}],
   fields: [
-    {name: 'id', type: 'string'},
+    {name: 'id', type: 'int'},
     {name: 'operatorId', type: 'int'},
     {name: 'loggerId', type: 'int'},
     {name: 'band', type: 'string'},

@@ -76,7 +76,9 @@ Ext.define('BLP2.controller.LogbookBrowser', {
     this.window.close();
     BLP2.ContestManager.fetchContest(logbookRecord.data.contestId, function(){
       BLP2.ContestManager.getContactModel(logbookRecord.data.contestId, function(contactModel){
-        
+        BLP2.LogbookManager.getLogbookStore(logbookRecord, function(logbookStore){
+          
+        });
         
       });
       BLP2.ContestManager.getContactEntry(logbookRecord.data.contestId, function(panel){
