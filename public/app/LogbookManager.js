@@ -25,8 +25,7 @@ Ext.define('BLP2.LogbookManager', {
               type: 'memory',
               reader: {
                   type: 'json',
-                  root: 'data',
-                  idProperty: 'id'
+                  root: 'data'
               }
           }
       });

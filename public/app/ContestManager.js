@@ -44,7 +44,7 @@ Ext.define('BLP2.ContestManager', {
       return;
     }
     this.fetchContest(contestId,function(contestJSON){
-      me.contestModels[contestId] = BLP2.model.Contact(contestJSON);
+      me.contestModels[contestId] = BLP2.model.Contact.factory(contestJSON);
       callback(me.contestModels[contestId]);
       
     });
