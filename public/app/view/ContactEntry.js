@@ -8,7 +8,8 @@ Ext.define('BLP2.view.ContactEntry', {
     'Ext.layout.container.HBox',
     'Ext.form.field.ComboBox'
   ],
-
+  
+  alias: 'widget.contact-entry',
   layout: 'anchor',
   autoScroll: true,
   border: false,
@@ -29,6 +30,7 @@ Ext.define('BLP2.view.ContactEntry', {
     }
   }, {
     text: 'Log',
+    itemId: 'log-button'
   }],
   items: [{
     title: 'Exchange'
