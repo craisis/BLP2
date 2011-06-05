@@ -36,6 +36,7 @@ Ext.define('BLP2.view.ContactEntry', {
     title: 'People',
     items: [{
       xtype: 'combo',
+      name: 'operatorId',
       fieldLabel: 'Operator',
       store: 'People',
       queryMode: 'local',
@@ -43,6 +44,7 @@ Ext.define('BLP2.view.ContactEntry', {
       valueField: 'id'
     }, {
       xtype: 'combo',
+      name: 'loggerId',
       fieldLabel: 'Logger',
       store: 'People',
       queryMode: 'local',
@@ -61,18 +63,22 @@ Ext.define('BLP2.view.ContactEntry', {
         flex: 1
       },
       items: [{
+        name: 'band',
         fieldLabel: 'Band',
       }, {
         xtype: 'splitter',
         flex: 0
       }, {
+        name: 'mode',
         fieldlabel: 'Mode',
       }]
     }, {
       xtype: 'textfield',
+      name: 'frequency',
       fieldLabel: 'Frequency'
     }, {
       xtype: 'textfield',
+      name: 'time',
       fieldLabel: 'Time'
     }]
   }],
@@ -81,6 +87,7 @@ Ext.define('BLP2.view.ContactEntry', {
     var exchangeFields = this.down('fieldset');
     Ext.each(contestDef['exchangeFields'], function(field, index){
       var widget = Ext.widget(field['type'], {
+        name: field['label'],
         fieldLabel: field['label'],
         listeners: {
           specialkey: function(field, e){
