@@ -18,6 +18,12 @@ Ext.define('BLP2.model.Person', {
         }
         return display;
       }
+    },
+    {
+      name: 'id',
+      convert: function(value, record) {
+        return record.get('callSign') || record.get('firstName') + ' ' + record.get('lastName');
+      }
     }
   ]
 });
