@@ -8,6 +8,6 @@ Ext.define('BLP2.view.LogbookDetails', {
   }],
 
   init: function(record){
-    this.update('Info for: ' + record.data.title);
+    this.update('Info for: ' + record.data.title + "with contest id of "+ record.data.contestId);
   }
 });
