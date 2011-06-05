@@ -65,7 +65,7 @@ Ext.define('BLP2.controller.LogbookBrowser', {
   
   // Below is BROKEN, this.window.query('gridpanel')[0].selected does not work!
   onLogbookOpen: function() {
-    var record = this.window.query('gridpanel')[0].selected;
+    var record = this.window.query('gridpanel')[0].getSelectionModel().getSelection()[0];
     this.openLogbook(record);
   },
 
