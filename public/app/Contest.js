@@ -32,13 +32,13 @@ Ext.define('BLP2.Contest', {
       autoScroll: true,
       border: false,
       defaults: {
-	margin: 6,
-	padding: 6
+        margin: 6,
+        padding: 6
       },
       buttons: [{
-	text: 'Clear',
+        text: 'Clear',
       }, {
-	text: 'Log',
+        text: 'Log',
       }]
     };
     var exchangeViewMap = {
@@ -80,28 +80,28 @@ Ext.define('BLP2.Contest', {
       },
       layout: 'anchor',
       items: [{
-	xtype: 'fieldcontainer',
-	layout: 'hbox',
-	fieldLabel: 'Band/Mode',
-	items: [{
+        xtype: 'fieldcontainer',
+        layout: 'hbox',
+        fieldLabel: 'Band/Mode',
+        items: [{
           xtype: 'textfield',
           fieldLabel: 'Band',
-	  hideLabel: true,
-	  flex: 1
+          hideLabel: true,
+          flex: 1
         }, {
-	  xtype: 'splitter',
-	}, {
-	  xtype: 'textfield',
-	  fieldLabel: 'Mode',
-	  hideLabel: true,
-	  flex: 1
-	}]
+          xtype: 'splitter',
+        }, {
+          xtype: 'textfield',
+          fieldLabel: 'Mode',
+          hideLabel: true,
+          flex: 1
+        }]
       } , {
-	xtype: 'textfield',
-	fieldLabel: 'Frequency',
+        xtype: 'textfield',
+        fieldLabel: 'Frequency',
       }, {
-	xtype: 'textfield',
-	fieldLabel: 'Time',
+        xtype: 'textfield',
+        fieldLabel: 'Time',
       }]
     };
     
