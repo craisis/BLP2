@@ -1,12 +1,14 @@
 Ext.define('BLP2.view.ContactEntry', {
   extend: 'Ext.form.Panel',
   requires: [
+    'Ext.EventObject',
     'Ext.form.FieldSet',
     'Ext.form.FieldContainer',
     'Ext.form.field.Text',
     'Ext.layout.container.Anchor',
     'Ext.layout.container.HBox',
-    'Ext.form.field.ComboBox'
+    'Ext.form.field.ComboBox',
+    'Ext.util.KeyMap'
   ],
   
   alias: 'widget.contact-entry',
@@ -26,7 +28,7 @@ Ext.define('BLP2.view.ContactEntry', {
   buttons: [{
     text: 'Clear',
     handler: function(){
-      this.up('form').getForm().reset();
+      this.up('form').clear();
     }
   }, {
     text: 'Log',
@@ -86,8 +88,11 @@ Ext.define('BLP2.view.ContactEntry', {
   }],
 
   init: function(contestDef){
+    var me = this;
     var exchangeFields = this.down('fieldset');
+    me.clearValues = {};
     Ext.each(contestDef['exchangeFields'], function(field, index){
+      me.clearValues[field.label] = null;
       var widget = Ext.widget(field['type'], {
         name: field['label'],
         fieldLabel: field['label'],
@@ -108,6 +113,19 @@ Ext.define('BLP2.view.ContactEntry', {
         }
       });
       exchangeFields.add(widget);
+    });
+  },
+
+  clear: function(){
+    this.getForm().setValues(this.clearValues);
+  },
+
+  afterRender: function(me){
+    this.callParent(arguments);
+    new Ext.util.KeyMap(me, {
+      key: Ext.EventObject.ESC,
+      fn: this.clear,
+      scope: this
     });
   }
 });
